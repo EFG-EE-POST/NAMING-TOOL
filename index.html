@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EFG NA File Naming Tool — Config Aware</title>
+  <style>
+    :root{--bg:#000;--fg:#fff;--gold:#D4AF37;--red:#FF3B30;--ok:#37FF8B}
+    html,body{height:100%}
+    body{font-family:"Arial Black", Arial, Helvetica, sans-serif;background:var(--bg);color:var(--fg);margin:0}
+    .wrap{max-width:980px;margin:0 auto;padding:20px}
+    h1{margin:0 0 10px;padding:12px;border:4px solid var(--gold)}
+    .contact{border:3px solid var(--gold);padding:10px;border-radius:10px;margin:10px 0 18px 0}
+    .contact b{color:var(--ok)}
+    .card{border:3px solid var(--gold);border-radius:12px;padding:14px}
+    label{display:block;font-size:12px;margin-bottom:6px}
+    input[type="text"], input[type="date"], select, input[type="number"]{width:100%;padding:10px 12px;border:2px solid var(--gold);border-radius:10px;background:#111;color:var(--fg);outline:none}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+    .col-6{grid-column:span 6}
+    .col-4{grid-column:span 4}
+    .col-3{grid-column:span 3}
+    .col-12{grid-column:1/-1}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button{cursor:pointer;padding:10px 14px;border:3px solid var(--gold);border-radius:10px;background:#111;color:var(--fg)}
+    .preview{border:4px solid var(--gold);border-radius:12px;padding:12px;background:#0b0b0b}
+    .filename{font-size:20px;margin-top:6px;color:var(--ok);word-break:break-all}
+    .error{border-color:var(--red)!important}
+    .error-title{color:var(--red)!important;border-color:var(--red)!important}
+    .hint{display:none}
+    .banner{border:3px solid var(--gold);border-radius:10px;padding:8px;margin:8px 0;font-size:12px}
+    .banner.error{border-color:var(--red);color:var(--red)}
+    @media (max-width:900px){.col-6,.col-4,.col-3{grid-column:1/-1}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 id="title">EFG NA File Naming Tool</h1>
+
+    <div class="contact">If you need help please contact <b>Aldo Necco</b>, Post Production Manager NA  •  <span>a.necco@efg.gg</span>  •  <span>818-636-2094</span></div>
+
+    <div id="netStatus" class="banner" style="display:none"></div>
+
+    <div class="card">
+      <div class="grid">
+
+        <div class="col-6">
+          <label for="game">Game or Series</label>
+          <select id="game"><option value="">Loading…</option></select>
+        </div>
+
+        <div class="col-6">
+          <label for="asset">Type of Video</label>
+          <select id="asset"><option value="">Loading…</option></select>
+        </div>
+
+        <div class="col-3">
+          <label for="date">Publish Date</label>
+          <input type="date" id="date" />
+        </div>
+        <div class="col-3">
+          <label for="version">Version</label>
+          <input type="number" id="version" min="1" step="1" placeholder="1" />
+        </div>
+        <div class="col-3">
+          <label for="editor">Editor Initials</label>
+          <input type="text" id="editor" maxlength="4" placeholder="AN" />
+        </div>
+        <div class="col-3">
+          <label for="approval">Approval</label>
+          <select id="approval">
+            <option value="">Select…</option>
+            <option>APPROVED</option>
+            <option>DRAFT</option>
+            <option>INREVIEW</option>
+            <option>REJECTED</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label for="event">Event or Show</label>
+          <input type="text" id="event" placeholder="EWC25_Dallas" />
+        </div>
+        <div class="col-3">
+          <label for="team">Team code 3 to 4</label>
+          <input type="text" id="team" placeholder="OPTC" maxlength="4" />
+        </div>
+        <div class="col-3">
+          <label for="player">Player code 3 to 4</label>
+          <input type="text" id="player" placeholder="SCMP" maxlength="4" />
+        </div>
+
+        <div class="col-12" style="height:8px"></div>
+
+        <div class="col-4">
+          <label for="vcodec">Video Codec</label>
+          <select id="vcodec">
+            <option value="">Select…</option>
+            <option>H264</option>
+            <option>H265</option>
+            <option>ProRes422HQ</option>
+            <option>DNxHD</option>
+            <option>XDCAMHD422</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="vres">Resolution</label>
+          <select id="vres">
+            <option value="">Select…</option>
+            <option>1080p</option>
+            <option>1440p</option>
+            <option>2160p</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="vfr">Frame Rate</label>
+          <select id="vfr">
+            <option value="">Select…</option>
+            <option>23.98</option>
+            <option>24</option>
+            <option>25</option>
+            <option>29.97</option>
+            <option>30</option>
+            <option>50</option>
+            <option>59.94</option>
+            <option>60</option>
+          </select>
+        </div>
+
+        <div class="col-4">
+          <label for="achannels">Audio Channels</label>
+          <select id="achannels">
+            <option value="">Select…</option>
+            <option>2ch</option>
+            <option>8ch</option>
+            <option>12ch</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="asample">Audio Sample Rate</label>
+          <select id="asample">
+            <option value="">Select…</option>
+            <option>48k</option>
+            <option>96k</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="abit">Audio Bit Depth</label>
+          <select id="abit">
+            <option value="">Select…</option>
+            <option>16b</option>
+            <option>24b</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <div class="preview">
+            <div>Preview Filename</div>
+            <div id="filename" class="filename">—</div>
+            <div class="controls">
+              <button id="copyBtn">Copy</button>
+              <button id="downloadBtn">Download .txt</button>
+              <button id="resetBtn">Reset</button>
+              <button id="reloadBtn" title="Reload config">Refresh list</button>
+            </div>
+          </div>
+          <div id="errors" class="preview" style="margin-top:10px">
+            <div id="errorTitle">Required Field Check</div>
+            <ul id="errorList" style="margin:6px 0 0 18px"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG_URL = "./efg-config.json"; // change to your hosted JSON location for online use
+    const $ = s=>document.querySelector(s);
+    const req=["#game","#asset","#date","#version","#editor","#approval","#vcodec","#vres","#vfr","#achannels","#asample","#abit"];
+    const fields={
+      game:$('#game'),asset:$('#asset'),date:$('#date'),version:$('#version'),editor:$('#editor'),approval:$('#approval'),event:$('#event'),team:$('#team'),player:$('#player'),vcodec:$('#vcodec'),vres:$('#vres'),vfr:$('#vfr'),achannels:$('#achannels'),asample:$('#asample'),abit:$('#abit')
+    };
+
+    function slug(s){return (s||'').replace(/\s+/g,'_').replace(/[^A-Za-z0-9_]/g,'').replace(/_+/g,'_').replace(/^_+|_+$/g,'')}
+    function short4(s){const t=slug(s).toUpperCase(); return t.slice(0,4)}
+    function yyyymmdd(d){if(!d)return'';const x=new Date(d);if(isNaN(x))return'';return `${x.getFullYear()}${String(x.getMonth()+1).padStart(2,'0')}${String(x.getDate()).padStart(2,'0')}`}
+    function vFmt(n){const v=parseInt(n,10);return v&&v>0?`V${String(v).padStart(2,'0')}`:''}
+
+    let CONFIG = { games:[], assets:[] };
+    async function loadConfig(showBanner=true){
+      const status = document.getElementById('netStatus');
+      try{
+        const res = await fetch(CONFIG_URL + '?t=' + Date.now(), {cache:'no-store'});
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        CONFIG = data;
+        populateSelects();
+        status.style.display = showBanner ? 'block' : 'none';
+        status.className = 'banner';
+        status.textContent = 'Lists loaded from config';
+      }catch(err){
+        status.style.display = 'block';
+        status.className = 'banner error';
+        status.textContent = 'Could not load config. Using last loaded options if any.';
+      }
+    }
+
+    function populateSelects(){
+      function setOptions(sel, items){
+        sel.innerHTML = '<option value="">' + 'Select…' + '</option>';
+        items.forEach(it=>{
+          const opt = document.createElement('option');
+          opt.value = (it.code||'').toUpperCase();
+          opt.textContent = it.label || it.code || '';
+          sel.appendChild(opt);
+        });
+      }
+      setOptions(fields.game, CONFIG.games||[]);
+      setOptions(fields.asset, CONFIG.assets||[]);
+    }
+
+    function build(){
+      const GAME=(fields.game.value||'').toUpperCase();
+      const ASSET=(fields.asset.value||'').toUpperCase();
+      const DATE=yyyymmdd(fields.date.value);
+      const V=vFmt(fields.version.value);
+      const ED=short4(fields.editor.value);
+      const AP=slug(fields.approval.value.toUpperCase());
+      const EV=slug(fields.event.value);
+      const TM=short4(fields.team.value);
+      const PL=short4(fields.player.value);
+
+      const VID=[slug(fields.vcodec.value),slug(fields.vres.value),slug(fields.vfr.value)].filter(Boolean).join('');
+      const AUD=[slug(fields.achannels.value),slug(fields.asample.value),slug(fields.abit.value)].filter(Boolean).join('');
+
+      const parts=['EFGNA',GAME,ASSET,EV,TM||null,PL||null,DATE,V,ED,AP,VID||null,AUD||null].filter(Boolean);
+      return parts.join('_')+'.mp4';
+    }
+
+    function validate(){
+      const errors=[]; ['#game','#asset','#date','#version','#editor','#approval','#vcodec','#vres','#vfr','#achannels','#asample','#abit'].forEach(s=>document.querySelector(s).classList.remove('error')); document.getElementById('title').classList.remove('error-title');
+      const checks=[["#game","Game"],["#asset","Type of Video"],["#date","Publish Date"],["#version","Version"],["#editor","Editor Initials"],["#approval","Approval"],["#vcodec","Video Codec"],["#vres","Resolution"],["#vfr","Frame Rate"],["#achannels","Audio Channels"],["#asample","Audio Sample Rate"],["#abit","Audio Bit Depth"]];
+      checks.forEach(([sel,label])=>{const el=document.querySelector(sel); if(!el.value){errors.push(label + ' is required.'); el.classList.add('error');}});
+      if(!(parseInt(fields.version.value,10)>=1)){errors.push('Version must be 1 or greater.'); fields.version.classList.add('error');}
+      if(!yyyymmdd(fields.date.value)){errors.push('Publish Date is invalid.'); fields.date.classList.add('error');}
+      if(errors.length){document.getElementById('title').classList.add('error-title');}
+      const list=document.getElementById('errorList'); list.innerHTML='';
+      if(errors.length){errors.forEach(t=>{const li=document.createElement('li'); li.textContent=t; li.style.color='var(--red)'; list.appendChild(li);});}
+      else{const li=document.createElement('li'); li.textContent='All required fields look good.'; li.style.color='var(--ok)'; list.appendChild(li);}    }
+
+    function refresh(){ document.getElementById('filename').textContent=build(); validate(); }
+
+    Object.values(fields).forEach(el=>{el.addEventListener('input',refresh); el.addEventListener('change',refresh);});
+    document.getElementById('copyBtn').addEventListener('click',async()=>{const t=document.getElementById('filename').textContent; try{await navigator.clipboard.writeText(t); alert('Filename copied');}catch(e){const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); alert('Filename copied');}});
+    document.getElementById('downloadBtn').addEventListener('click',()=>{const txt=document.getElementById('filename').textContent; const blob=new Blob([txt+"\n"],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='efgna_filename.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href);});
+    document.getElementById('resetBtn').addEventListener('click',()=>{Object.values(fields).forEach(el=>el.value=''); refresh(); window.scrollTo({top:0,behavior:'smooth'});});
+    document.getElementById('reloadBtn').addEventListener('click',()=>loadConfig(true));
+
+    setInterval(()=>loadConfig(false), 5*60*1000);
+    ['editor','team','player'].forEach(k=>{fields[k].addEventListener('input', ()=>{fields[k].value = fields[k].value.toUpperCase().slice(0,4); refresh();});});
+    loadConfig(true).then(refresh);
+  </script>
+</body>
+</html>

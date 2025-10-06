@@ -1,0 +1,118 @@
+{
+  "games": [
+    {
+      "label": "Apex Legends Global Series",
+      "code": "ALGS"
+    },
+    {
+      "label": "Battlefield 6",
+      "code": "BF6"
+    },
+    {
+      "label": "Brawl Stars",
+      "code": "BWS"
+    },
+    {
+      "label": "Call of Duty",
+      "code": "COD"
+    },
+    {
+      "label": "Call of Duty Mobile",
+      "code": "CODM"
+    },
+    {
+      "label": "Clash of Clans",
+      "code": "COC"
+    },
+    {
+      "label": "Clash Royale",
+      "code": "CRL"
+    },
+    {
+      "label": "DreamHack Atlanta",
+      "code": "DHATL"
+    },
+    {
+      "label": "DreamHack Sweden",
+      "code": "DHSW"
+    },
+    {
+      "label": "EA Football",
+      "code": "FTB"
+    },
+    {
+      "label": "EA Madden",
+      "code": "MDN"
+    },
+    {
+      "label": "Marvel Rivals",
+      "code": "MRL"
+    },
+    {
+      "label": "NBA 2K",
+      "code": "N2K"
+    },
+    {
+      "label": "Overwatch",
+      "code": "OWCS"
+    },
+    {
+      "label": "SNK",
+      "code": "SNK"
+    },
+    {
+      "label": "Teamfight Tactics",
+      "code": "TFT"
+    },
+    {
+      "label": "TwitchCon",
+      "code": "TWC"
+    },
+    {
+      "label": "World Series of Warzone",
+      "code": "WSOW"
+    }
+  ],
+  "assets": [
+    {
+      "label": "Hero Shots",
+      "code": "HERO"
+    },
+    {
+      "label": "Video Headshot",
+      "code": "VHDS"
+    },
+    {
+      "label": "Teaser",
+      "code": "TEAS"
+    },
+    {
+      "label": "Show Open",
+      "code": "OPEN"
+    },
+    {
+      "label": "After Party",
+      "code": "APAR"
+    },
+    {
+      "label": "Sizzle",
+      "code": "SIZZ"
+    },
+    {
+      "label": "Interview",
+      "code": "INTV"
+    },
+    {
+      "label": "Gameplay Highlight",
+      "code": "GHLT"
+    },
+    {
+      "label": "Social Cutdown",
+      "code": "SCUT"
+    },
+    {
+      "label": "Other",
+      "code": "OTHR"
+    }
+  ]
+}
